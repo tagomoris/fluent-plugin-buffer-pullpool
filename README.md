@@ -1,29 +1,36 @@
-# Fluent::Plugin::Buffer::Pullpool
+# fluent-plugin-buffer-pullpool
 
-TODO: Write a gem description
+[Fluentd](http://fluentd.org) file buffer plugin to store events until output plugin's pull actions.
+
+**NOTICE:** PullPool buffer plugin works just as same as normal file buffer plugin for normal buffered/time-sliced output plugins. Use this plugin with output plugins written to use this plugin.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Do `gem install fluent-plugin-buffer-pullpool` or `fluent-gem ...`.
 
-    gem 'fluent-plugin-buffer-pullpool'
+## Configuration
 
-And then execute:
+PullPool buffer plugin has options just same with File buffer plugin. `buffer_path` option must be specified.
 
-    $ bundle
+```
+<match data.**>
+  type buffered_plugin_to_use_pullpool
+  
+  buffer_type pullpool
+  buffer_path /home/myuser/tmp/pullbuffer
+  buffer_chunk_limit 256M
+  buffer_queue_limit 256
+</match>
+```
 
-Or install it yourself as:
+Specifing short time for `flush_interval` makes a lot of chunk files.
 
-    $ gem install fluent-plugin-buffer-pullpool
+## TODO
 
-## Usage
+* patches welcome!
 
-TODO: Write usage instructions here
+## Copyright
 
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/fluent-plugin-buffer-pullpool/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+* Copyright (c) 2014- TAGOMORI Satoshi (tagomoris)
+* License
+  * Apache License, Version 2.0
